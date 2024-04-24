@@ -1,0 +1,33 @@
+html,body{
+    height: 100%;
+}
+
+.full-height {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex: 1;
+}
+
+.all-way{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+} 
+
+.card{
+    border-radius: 35px;
+}
+
+.display-4{
+    color:#1C2331 ;
+}
+
+.small{
+    color:#868B94;
+}
+
+/* style="font-size: 1rem;" this goes on top of the i */
