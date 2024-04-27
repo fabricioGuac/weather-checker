@@ -2,6 +2,14 @@ html,body{
     height: 100%;
 }
 
+img{
+    width: 50px;
+}
+
+.bigone{
+    width: 100px;
+}
+
 .full-height {
     min-height: 100vh;
     display: flex;
@@ -29,3 +37,4 @@ html,body{
 .small{
     color:#868B94;
 }
+
