@@ -18,14 +18,14 @@
         <form class="d-flex flex-column flex-grow-1">
           <label for="city" class="h3">Search for a City</label>
           <input class="form-control mb-3" type="search" id="city" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <button class="btn btn-outline-success" id="search" type="submit">Search</button>
           <h3>Previous Searches</h3>
         <ul id="history">
         </ul>
         </form>
     </nav>
       <main class="col-md-9 bg-light">
-     <section class="text-center">
+     <section id="today" class="text-center">
         <div class="container py-5 h-100">
 
             <div class="row d-flex justify-content-center align-items-center h-100">
@@ -63,7 +63,7 @@
         
           </div>
     </section>
-    <section>
+    <section id="forecast">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-lg-6 col-xl-2"> 
