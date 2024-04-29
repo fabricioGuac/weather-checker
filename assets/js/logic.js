@@ -2,8 +2,30 @@ let history =  JSON.parse(localStorage.getItem("history")) || [];
 const today = $('#today');
 const forecast = $('#forecast');
 const historylist = $('#history');
+const h1 =$('h1');
+let h1error = false;
 // Creates a variable to store the api key
 const Apikey = "64c061c7a143e44714946379a0b46c02";
+
+// Function to display the error message in the h1 and the console
+const errorMsg = (error) => {
+    console.error(error);
+    if (!h1error) {
+        h1error= true;
+        
+        const h1 = $('h1');
+        const h1a = h1.text();
+        
+        h1.text(`${error}, Please try again.`).addClass('text-danger');
+        
+        setTimeout(() => {
+            h1.text(h1a).removeClass('text-danger');
+            h1error= false; 
+        }, 10000);
+    }
+};
+
+
 
 // Function to get the lat and lon from the city name 
 const  latLonGetter = async (city) => {
@@ -19,7 +41,8 @@ const  latLonGetter = async (city) => {
     console.log(lat, lon);
     return{lat,lon};
     }catch(error){
-        console.log(error);
+        errorMsg(error);
+        throw error;
     }
     
 };
@@ -35,7 +58,8 @@ const weatherGetter = async (lat,lon) => {
         const weather = data.list;
         return weather;
     }catch(error){
-        console.log(error);
+        errorMsg(error);
+        throw error;
     }
 };
 
@@ -43,16 +67,13 @@ const weatherGetter = async (lat,lon) => {
 const latLonWeather = (city) => {
     latLonGetter(city)
         .then(({ lat, lon }) => {
-            weatherGetter(lat, lon)
-                .then((weather) => {
-                    console.log(weather);
-                })
-                .catch(error => {
-                    console.log(error);
-                });
+            return weatherGetter(lat, lon); // Return the promise here
+        })
+        .then((weather) => {
+            console.log(weather);
         })
         .catch(error => {
-            console.log(error);
+            errorMsg(error);
         });
 };
 
