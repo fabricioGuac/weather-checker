@@ -115,17 +115,27 @@ const weatherSearcher = (event) => {
 
 const createWeatherCard = (city, weather) => {
 
+    // Loops over the array to get the information in the cards 
     for(let i = 0; i < weather.length; i++){
-    const container = $('<div>').addClass('container py-5 h-100'); 
-    const row =$('<div>').addClass('row d-flex justify-content-center align-items-center h-100'); 
-    const col = $('<div>').addClass('col-md-8 col-g-6 col-xl-4'); 
+
+        // Sets the classes that will be applied if it is the first element or not
+    const colClass = i === 0 ? 'col-md-8 col-g-6 col-xl-4': 'col-md-8 col-lg-6 col-xl-2'
+    const cardBodyClass = i === 0 ? 'card-body p-4' : 'card-body p-2'
+    const headerClass = i === 0 ? 'd-flex' : 'd-flex text-center'
+    const dateClass = i === 0 ? '' : 'me-3'
+    const tempCondclass = i === 0 ? 'd-flex flex-column text-center mt-5 mb-4' : 'd-flex flex-column text-center mt-3 mb-2'
+    const imgclass = i === 0 ? 'bigone' : ''
+    const degrees = i === 0 ? 'display-4 mb-0 font-weight-bold' : 'display-6 mb-0 font-weight-bold'
+
+        // Creates the html elements 
+    const col = $('<div>').addClass(colClass); 
     const card = $('<div>').addClass('card'); 
-    const cardBody = $('<div>').addClass('card-body p-4'); 
-    const header = $('<div>').addClass('d-flex'); 
+    const cardBody = $('<div>').addClass(cardBodyClass); 
+    const header = $('<div>').addClass(headerClass); 
     const cityname = $('<h6>').addClass('flex-grow-1').text(city); 
-    const date = $('<h6>').text(dayjs(weather[i].dt_txt).format('MMMM DD, YYYY')); 
-    const tempcond = $('<div>').addClass('d-flex flex-column text-center mt-5 mb-4'); 
-    const temp = $('<h6>').addClass('display-4 mb-0 font-weight-bold').text(`${weather[i].main.temp} ºF`);
+    const date = $('<h6>').text(dayjs(weather[i].dt_txt).format('M/D/YY')).addClass(dateClass); 
+    const tempcond = $('<div>').addClass(tempCondclass); 
+    const temp = $('<h6>').addClass(degrees).text(`${weather[i].main.temp} ºF`);
     const cond = $('<span>').addClass('small').text(weather[i].weather[0].main);
     const humWindicon = $('<div>').addClass('d-flex align-items-center'); 
     const humWind = $('<div>').addClass('flex-grow-1'); 
@@ -136,8 +146,9 @@ const createWeatherCard = (city, weather) => {
     const humi = $('<i>').addClass('fas fa-tint fa-fw');
     const humSpan = $('<span>').text(`${weather[i].main.humidity} %`).addClass('ms-1');
     const icondiv = $('<div>');
-    const icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${weather[i].weather[0].icon}.png`).addClass('bigone');
+    const icon = $('<img>').attr('src', `http://openweathermap.org/img/w/${weather[i].weather[0].icon}.png`).addClass(imgclass);
     
+    // Appents the html elements to form the card
     header.append(cityname, date);
     tempcond.append(temp, cond);
     wind.append(windi, windSpan);
@@ -148,9 +159,12 @@ const createWeatherCard = (city, weather) => {
     cardBody.append(header, tempcond, humWindicon);
     card.append(cardBody);
     col.append(card);
-    row.append(col);
-    container.append(row);
-    today.append(container);}
+
+    // Appends the first card to a different div
+    if(i === 0){
+        today.append(col);
+    }else{forecast.append(col);}
+    };
 };
 
 
