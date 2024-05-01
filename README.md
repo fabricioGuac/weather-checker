@@ -19,7 +19,7 @@ N/A
 
 ## Screenshot displaying the deployed site
 
-![]()
+![weather-checker](./assets/weather-checker.png)
 
 ## URL to the deployed site
 

@@ -37,10 +37,8 @@ const currentWeatherGetter = async (city) => {
             throw new Error('Failed to fetch  current weather condition');
         }
         const data = await response.json();
-        console.log(data);
         const crrntweather = data;
-        const lat = data.coord.lat;
-        const lon = data.coord.lon;
+        const { lat, lon } = data.coord;
         return {crrntweather, lat, lon};
     }catch(error){
         errorMsg(error);
@@ -56,7 +54,6 @@ const weatherGetter = async (lat,lon) => {
             throw new Error('Failed to fetch weather condition');
         }
         const data = await response.json();
-        console.log(data);
         const weather = data.list;
         return weather;
     }catch(error){
@@ -77,12 +74,9 @@ const latLonWeather = (city) => {
         return weatherGetter(lat, lon);
     })
     .then((weather) =>{
-        console.log(weather);
         for (let i = 6; i < weather.length; i += 8) {
             cardInfo.push(weather[i]);
-            console.log(weather[i].dt_txt);
-        }
-        console.log(cardInfo);
+        };
         today.empty();
         forecast.empty();
         createWeatherCard(cardInfo);
@@ -176,7 +170,6 @@ const historybtn = (event) => {
     event.preventDefault();
     latLonWeather(event.target.textContent);
 };
-
 
 
 // When the page is fully loaded adds event listeners and loops over the history to get the history buttons on the page
