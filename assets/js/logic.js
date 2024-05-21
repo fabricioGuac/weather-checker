@@ -138,7 +138,7 @@ const createWeatherCard = (weather) => {
     const humWind = $('<div>').addClass('flex-grow-1'); 
     const wind = $('<div>'); 
     const windi = $('<i>').addClass('fas fa-wind fa-fw');
-    const windSpan = $('<span>').text(`${weather[i].wind.speed} km/h`).addClass('ms-1'); 
+    const windSpan = $('<span>').text(`${weather[i].wind.speed} mph`).addClass('ms-1'); 
     const hum = $('<div>'); 
     const humi = $('<i>').addClass('fas fa-tint fa-fw');
     const humSpan = $('<span>').text(`${weather[i].main.humidity} %`).addClass('ms-1');
